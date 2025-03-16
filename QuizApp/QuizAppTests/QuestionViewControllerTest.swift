@@ -33,13 +33,18 @@ class QuestionViewControllerTest: XCTestCase {
         // XCTAssertEqual(makeSUT(options: ["A1", "A2"]).tableView.numberOfRows(inSection: 0), 2)
     }
     
+    // MARK: Remove this method after making the 'test_viewDidLoad_rendersOptionsText()' method pass
+    
     func test_viewDidLoad_withOneOption_rendersOneOptionText() {
-        let sut = makeSUT(options: ["A1"])
+        // NOTE: It should work all in one line (without explicit 'sut' variable but it doesnt't)
+        // let sut = makeSUT(options: ["A1"])
         
-        let indexPath = IndexPath(row: 0, section: 0)
-        let cell = sut.tableView.dataSource?.tableView(sut.tableView, cellForRowAt: indexPath)
-        
-        XCTAssertEqual(cell?.textLabel?.text, "A1")
+        // XCTAssertEqual(sut.tableView.title(at: 0), "A1")
+    }
+    
+    func test_viewDidLoad_rendersOptionsText() {
+        // XCTAssertEqual(makeSUT(options: ["A1", "A2"]).tableView.title(at: 0), "A1")
+        // XCTAssertEqual(makeSUT(options: ["A1", "A2"]).tableView.title(at: 1), "A2")
     }
     
     // MARK: Helpers
@@ -48,5 +53,16 @@ class QuestionViewControllerTest: XCTestCase {
         let sut = QuestionViewController(question: question, options: options)
         _ = sut.view // Loads the view
         return sut
+    }
+}
+
+private extension UITableView {
+    
+    func cell(at row: Int) -> UITableViewCell? {
+        return dataSource?.tableView(self, cellForRowAt: IndexPath(row: row, section: 0))
+    }
+    
+    func title(at row: Int) -> String? {
+        return cell(at: row)?.textLabel?.text
     }
 }
