@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        let questionVC = QuestionViewController(question: "")
+        let questionVC = QuestionViewController(question: "", options: [])
         window.rootViewController = UINavigationController(rootViewController: questionVC)
         self.window = window
         window.makeKeyAndVisible()
